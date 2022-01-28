@@ -1,8 +1,5 @@
-import React, { useState } from 'react'
-import HSpacerComponent from '../../components/h_spacer/h_spacer.component'
-import VSpacerComponent from '../../components/v_spacer/v_spacer.component'
+import React, { useState, useEffect } from 'react'
 
-import IconButton from '@mui/material/IconButton'
 
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import PauseIcon from '@mui/icons-material/Pause'
@@ -13,21 +10,63 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import DeleteIcon from '@mui/icons-material/Delete'
 
 
+// components
+import HSpacerComponent from '../../components/h_spacer/h_spacer.component'
+import VSpacerComponent from '../../components/v_spacer/v_spacer.component'
+
+
+
 import './home.page.scss'
 
 
 
 const HomePage = () => {
-    const [title, setTitle] = useState()
-    const [tasks, setTasks] = useState([])
-    const [currentTask, setCurrentTask] = useState()
+    let [title, setTitle] = useState()
+    let [tasks, setTasks] = useState([])
+    let [currentTask, setCurrentTask] = useState()
+    
 
-    const [seconds, setSeconds] = useState(0)
-    const [currentseconds, setCurrentSeconds] = useState(0)
-    const [isPaused, setIsPaused] = useState(false)
+    let [timerRef, setTimerRef] = useState(null)
 
-    const [isTimeDisplayHidden, setIsTimeDisplayHidden] = useState(false)
+    let [currentSeconds, setCurrentSeconds] = useState(0)
+    let [isPaused, setIsPaused] = useState(false)
 
+    let [isTimeDisplayHidden, setIsTimeDisplayHidden] = useState(false)
+
+
+
+    const startTimer = ()=> {
+        console.log("start timer")
+        let ref = setInterval(()=> setCurrentSeconds(currentSeconds++), 1000)
+        setTimerRef(ref)
+    }// startTimer
+    
+    const pauseTimer = ()=> {
+        console.log("pause timer")
+        setIsPaused(true)
+        clearInterval(timerRef)
+        setTimerRef(null)
+    }// pauseTimer
+
+    const resumeTimer = ()=> {
+        console.log("resume timer")
+        setIsPaused(false)
+        startTimer()
+    }// resumeTimer
+
+    const stopTimer = ()=> {
+        console.log("stop timer")
+        clearInterval(timerRef)
+        setTimerRef(null)
+
+        setCurrentSeconds(0)
+        setIsPaused(false)
+    }// stopTimer
+
+
+    useEffect(()=> {
+        
+    }, [ isPaused, currentSeconds ])
     
 
     return (
@@ -40,13 +79,29 @@ const HomePage = () => {
 
 
                 {/* time */}
-                <h1 className='time_container__time'>
-                    00:00
-                </h1>
+                {
+                    currentSeconds === 0 &&
+                        <p className='time_container__time'>
+                            00:00
+                        </p>           
+                }
+                {
+                    currentSeconds > 0 &&    
+                        <p className='time_container__time'>
+                            {
+                                parseInt(currentSeconds/60).toString().padStart(2, '0')
+                            }:{""}
+                            { 
+                                parseInt(currentSeconds%60).toString().padStart(2, '0') 
+                            }
+                        </p>
+                }
                 
                 {/* current task */}
                 <div className='time_container__current_task'>
-                    <div className='time_container__current_task__indicator' />
+                    <div className='time_container__current_task__indicator__container'>
+                        <div className={ `time_container__current_task__indicator ${(!isPaused && currentSeconds > 0) ? 'blink_animator' : ''}` } />
+                    </div>
                     <HSpacerComponent space={1} />
                     <p className='time_container__current_task__title'>
                         Do Something
@@ -60,12 +115,38 @@ const HomePage = () => {
 
                     {/* pause/play */}
                     <div className='time_container__actions__icon_button'>
-                        <DeleteIcon fontSize='2' />
+                        {
+                            (!isPaused && currentSeconds > 0) &&
+                                <PauseIcon
+                                    fontSize='2' 
+                                    className='time_container__actions__icon_button__icon'
+                                    onClick={pauseTimer}
+                                />
+                        }
+                        {
+                            (isPaused && currentSeconds > 0) &&
+                                <PlayArrowIcon 
+                                    fontSize='2' 
+                                    className='time_container__actions__icon_button__icon' 
+                                    onClick={resumeTimer}
+                                />
+                        }
+                        {
+                            currentSeconds === 0 && 
+                                <PlayArrowIcon 
+                                    fontSize='2' 
+                                    className='time_container__actions__icon_button__icon' 
+                                    onClick={startTimer}
+                                />
+                        }
                     </div>
 
                     {/* stop */}
-                    <div className='time_container__actions__icon_button'>
-                        <StopIcon fontSize='2' />
+                    <div 
+                        className='time_container__actions__icon_button'
+                        onClick={stopTimer}
+                    >
+                        <StopIcon fontSize='4' className='time_container__actions__icon_button__icon' />
                     </div>
                     
                     {/* hide or show */}
@@ -76,10 +157,10 @@ const HomePage = () => {
                         }
                     >
                         {
-                            isTimeDisplayHidden && <VisibilityOffIcon />
+                            isTimeDisplayHidden && <VisibilityOffIcon fontSize='4' className='time_container__actions__icon_button__icon' />
                         }
                         {
-                            !isTimeDisplayHidden && <RemoveRedEyeIcon />
+                            !isTimeDisplayHidden && <RemoveRedEyeIcon fontSize='4' className='time_container__actions__icon_button__icon' />
                         }
                     </div>
 
@@ -87,9 +168,8 @@ const HomePage = () => {
                 
 
             </div>
-
-            
             <VSpacerComponent space={4} />
+            
 
 
 
