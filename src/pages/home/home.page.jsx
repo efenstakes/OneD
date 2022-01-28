@@ -20,6 +20,7 @@ import VSpacerComponent from '../../components/v_spacer/v_spacer.component'
 
 
 import './home.page.scss'
+import TaskItemCardComponent from '../../components/task_item_card/task_item_card.component'
 
 
 
@@ -78,10 +79,10 @@ const HomePage = () => {
 
         setTasks((state)=> {
             return [
-                ...state, 
+                ...state,
                 {
                     task: inEditTask,
-                    complete: false,
+                    completed: false,
                     current: false,
                 }
             ]
@@ -231,11 +232,14 @@ const HomePage = () => {
             <div className='tasks_container'>
                 {
                     tasks.map(({ task, completed })=> {
+                        const isOngoing = task == currentTask
 
                         return (
-                            <p>
-                                {task}
-                            </p>
+                            <TaskItemCardComponent
+                                task={task}
+                                completed={completed}
+                                isOngoing={isOngoing}
+                            />
                         )
                     })
                 }
