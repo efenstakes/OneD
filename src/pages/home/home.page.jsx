@@ -16,11 +16,12 @@ import { TextField, Button } from '@mui/material'
 // components
 import HSpacerComponent from '../../components/h_spacer/h_spacer.component'
 import VSpacerComponent from '../../components/v_spacer/v_spacer.component'
+import TaskItemCardComponent from '../../components/task_item_card/task_item_card.component'
+import { NoTasksComponent } from './no_tasks.component'
 
 
 
 import './home.page.scss'
-import TaskItemCardComponent from '../../components/task_item_card/task_item_card.component'
 
 
 
@@ -28,7 +29,7 @@ const HomePage = () => {
     let [title, setTitle] = useState()
     let [tasks, setTasks] = useState([])
     let [inEditTask, setInEditTask] = useState('')
-    let [currentTask, setCurrentTask] = useState()
+    let [onGoingTask, setOnGoingTask] = useState()
     
 
     let [timerRef, setTimerRef] = useState(null)
@@ -83,12 +84,55 @@ const HomePage = () => {
                 {
                     task: inEditTask,
                     completed: false,
-                    current: false,
+                    active: false,
                 }
             ]
         })
         setInEditTask('')
     }// addInEditTask
+
+
+    // mark task as complete
+    const markTaskAsComplete = (task)=> {
+        const new_tasks = tasks.map((tsk)=> {
+            return {
+                ...tsk,
+                completed: !tsk.completed,
+            }
+        })
+        setTasks(new_tasks)
+    }// markTaskAsComplete
+
+    // mark task as active
+    const markTaskAsActive = (task)=> {
+        setOnGoingTask(task)
+        const new_tasks = tasks.map((tsk)=> {
+            return {
+                ...tsk,
+                active: task == tsk.task ? true : false,
+            }
+        })
+        setTasks(new_tasks)
+    }// markTaskAsActive
+
+    // mark task as inactive
+    const markTaskAsInActive = (task)=> {
+        setOnGoingTask(null)
+        const new_tasks = tasks.map((tsk)=> {
+            return {
+                ...tsk,
+                active: task == tsk.task ? false : true,
+            }
+        })
+        setTasks(new_tasks)
+    }// markTaskAsInActive
+
+    // delete task
+    const deleteTask = (task)=> {
+        const new_tasks = tasks.filter((tsk)=> tsk.task != task)
+        setTasks(new_tasks)
+    }// deleteTask
+
 
 
     const startAddTaskTimer = ()=> {
@@ -155,15 +199,18 @@ const HomePage = () => {
                 }
                 
                 {/* current task */}
-                <div className='time_container__current_task'>
-                    <div className='time_container__current_task__indicator__container'>
-                        <div className={ `time_container__current_task__indicator ${(!isPaused && currentSeconds > 0) ? 'blink_animator' : ''}` } />
-                    </div>
-                    <HSpacerComponent space={1} />
-                    <p className='time_container__current_task__title'>
-                        Do Something
-                    </p>
-                </div>
+                {
+                    onGoingTask &&
+                        <div className='time_container__current_task'>
+                            <div className='time_container__current_task__indicator__container'>
+                                <div className={ `time_container__current_task__indicator ${(!isPaused && currentSeconds > 0) ? 'blink_animator' : ''}` } />
+                            </div>
+                            <HSpacerComponent space={1} />
+                            <p className='time_container__current_task__title'>
+                                { onGoingTask }
+                            </p>
+                        </div>
+                }
 
                 <VSpacerComponent space={4} />
 
@@ -201,7 +248,7 @@ const HomePage = () => {
                     {/* stop */}
                     <div 
                         className='time_container__actions__icon_button'
-                        onClick={stopTimer}
+                        onClick={ (currentSeconds > 0) ? stopTimer : null }
                     >
                         <StopIcon fontSize='4' className='time_container__actions__icon_button__icon' />
                     </div>
@@ -231,14 +278,25 @@ const HomePage = () => {
             {/* tasks */}
             <div className='tasks_container'>
                 {
-                    tasks.map(({ task, completed })=> {
-                        const isOngoing = task == currentTask
+                    tasks.map((task)=> {
+                        const isOngoing = task.task == onGoingTask
 
                         return (
                             <TaskItemCardComponent
-                                task={task}
-                                completed={completed}
+                                task={task.task}
+                                completed={task.completed}
                                 isOngoing={isOngoing}
+                                onComplete={
+                                    ()=> markTaskAsComplete(task)
+                                }
+                                onOnGoing={
+                                    ()=> isOngoing 
+                                            ? markTaskAsInActive(task.task) 
+                                            : markTaskAsActive(task.task)
+                                }
+                                onDelete={
+                                    ()=> deleteTask(task.task)
+                                }
                             />
                         )
                     })
@@ -246,26 +304,7 @@ const HomePage = () => {
             </div>
             {
                 tasks.length === 0 &&
-                    <div className='no_tasks_container'>
-
-                        <HourglassBottomOutlined fontSize='8' className='no_tasks_container__icon' />
-                        <VSpacerComponent space={2} />
-
-                        <h4> No Tasks </h4>
-                        <VSpacerComponent space={.5} />
-
-                        <p>
-                            You have not added any tasks yet. Click below button to add one.
-                        </p>
-
-                        <Button
-                            color='primary'
-                            onClick={showAddTaskForm}
-                        > 
-                            Add Task 
-                        </Button>
-
-                    </div>
+                    <NoTasksComponent showAddTaskForm={showAddTaskForm} />
             }
 
             <h1> { addTaskFormTime } </h1>
