@@ -1,0 +1,88 @@
+@import "../../styles/theme.scss";
+
+
+.page {
+    @media screen and (max-width: 560px) {
+        padding: 0 16px;
+    }
+    @media screen and (min-width: 560px) {
+        padding: 0 10vw;
+    }
+    @media screen and (min-width: 880px) {
+        padding: 0 20vw;
+    }
+    @media screen and (min-width: 1080px) {
+        padding: 0 30vw;
+    }
+
+}
+
+.time_container {
+    width: 100%;
+
+    padding: 40px 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border-radius: 20px;
+
+    color: $WHITE_COLOR;
+    background-image: linear-gradient(to bottom right, $PRIMARY_COLOR, $SECONDARY_COLOR);
+}
+
+
+.time_container__current_task {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    max-width: 560px;
+}
+
+
+.time_container__current_task__indicator {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+
+    border: 2px solid $WHITE_COLOR;
+    background-image: linear-gradient(to bottom, $TERTIARY_COLOR, $SUCCESS_COLOR);
+}
+
+
+.time_container__current_task__title {
+    text-align: center;
+}
+
+
+
+.time_container__actions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    min-width: 160px;
+    max-width: 300px;
+    
+    background-color: red;
+}
+
+
+.time_container__actions__btn {
+    background-color: chartreuse;
+}
+
+.time_container__actions__icon_button {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+    background-color: $PRIMARY_COLOR;
+}
