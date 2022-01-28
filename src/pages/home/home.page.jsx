@@ -8,6 +8,9 @@ import ReplayIcon from '@mui/icons-material/Replay'
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import DeleteIcon from '@mui/icons-material/Delete'
+import HourglassBottomOutlined from '@mui/icons-material/HourglassBottomOutlined'
+
+import { TextField, Button } from '@mui/material'
 
 
 // components
@@ -23,6 +26,7 @@ import './home.page.scss'
 const HomePage = () => {
     let [title, setTitle] = useState()
     let [tasks, setTasks] = useState([])
+    let [inEditTask, setInEditTask] = useState('')
     let [currentTask, setCurrentTask] = useState()
     
 
@@ -32,6 +36,10 @@ const HomePage = () => {
     let [isPaused, setIsPaused] = useState(false)
 
     let [isTimeDisplayHidden, setIsTimeDisplayHidden] = useState(false)
+
+    let [isAddTaskFormShown, setIsAddTaskFormShown] = useState(false)
+    let [addTaskFormTime, setAddTaskFormTime] = useState(0)
+    let [addTaskFormTimerRef, setAddTaskFormTimerRef] = useState(null)
 
 
 
@@ -64,9 +72,57 @@ const HomePage = () => {
     }// stopTimer
 
 
+    const addInEditTask = ()=> {
+        console.log("add addInEditTask")
+        if( inEditTask.length < 2 ) return
+
+        setTasks((state)=> {
+            return [
+                ...state, 
+                {
+                    task: inEditTask,
+                    complete: false,
+                    current: false,
+                }
+            ]
+        })
+        setInEditTask('')
+    }// addInEditTask
+
+
+    const startAddTaskTimer = ()=> {
+        setIsAddTaskFormShown(true)
+        setAddTaskFormTime(8)
+
+        addTaskFormTimerRef && clearInterval(addTaskFormTimerRef)
+
+        let ref = setInterval(
+                    ()=> {
+                        // console.log("running startAddTaskTimer ", addTaskFormTime)
+                        setAddTaskFormTime((state)=> {
+                            return state <= 0 ? 0 : state - 1
+                        })
+                    }, 
+                    1000
+                  )
+        setAddTaskFormTimerRef(ref)
+    }// startAddTaskTimer
+
+    const showAddTaskForm = ()=> {
+        startAddTaskTimer()
+    }// showAddTaskForm
+
+
     useEffect(()=> {
         
     }, [ isPaused, currentSeconds ])
+
+    useEffect(()=> {
+        // console.log("addTaskFormTime is ", addTaskFormTime)
+        if( addTaskFormTime <= 0 ) {
+            clearInterval(addTaskFormTimerRef)
+        }
+    }, [ addTaskFormTime ])
     
 
     return (
@@ -168,9 +224,74 @@ const HomePage = () => {
                 
 
             </div>
-            <VSpacerComponent space={4} />
+            <VSpacerComponent space={8} />
             
+            
+            {/* tasks */}
+            <div className='tasks_container'>
+                {
+                    tasks.map(({ task, completed })=> {
 
+                        return (
+                            <p>
+                                {task}
+                            </p>
+                        )
+                    })
+                }
+            </div>
+            {
+                tasks.length === 0 &&
+                    <div className='no_tasks_container'>
+
+                        <HourglassBottomOutlined fontSize='8' className='no_tasks_container__icon' />
+                        <VSpacerComponent space={2} />
+
+                        <h4> No Tasks </h4>
+                        <VSpacerComponent space={.5} />
+
+                        <p>
+                            You have not added any tasks yet. Click below button to add one.
+                        </p>
+
+                        <Button
+                            color='primary'
+                            onClick={showAddTaskForm}
+                        > 
+                            Add Task 
+                        </Button>
+
+                    </div>
+            }
+
+            <h1> { addTaskFormTime } </h1>
+            
+            <VSpacerComponent space={10} />
+
+            {/* add tasks */}
+            {
+                isAddTaskFormShown && addTaskFormTime > 0 &&
+                    <div className='add_tasks_container'>
+                        <TextField
+                            value={inEditTask}
+                            placeholder='Enter task name...'
+                            onChange={
+                                (v)=> {
+                                    startAddTaskTimer()
+                                    setInEditTask(v.target.value)
+                                }
+                            }
+                            onKeyDown={
+                                (e)=> {
+                                    if(e.code == "Enter") {
+                                        addInEditTask()
+                                    }
+                                }
+                            }
+                            className='add_tasks_container__text_input'
+                        />
+                    </div>
+            }
 
 
         </div>
