@@ -1,0 +1,85 @@
+@import "../../styles/commons";
+
+
+
+.card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 16px .4rem;
+
+    @media screen and (max-width: 400px) {
+        background-color: orange;
+    }
+}
+
+.card__text {
+    flex: 1;
+}
+
+.card__actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+
+.card__actions__icon_button {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+    background-color: $WHITE_COLOR;
+    color: red;
+}
+
+
+.card__actions__icon_button__delete {
+    border: 1px solid $ERROR_COLOR;
+    // background-image: linear-gradient(to bottom right, $ERROR_COLOR, rgba(255, .1, .1, .5));
+}
+.card__actions__icon_button__delete__active {
+    background-image: linear-gradient(to bottom right, $ERROR_COLOR, rgba(255, .1, .1, .5));
+}
+.card__actions__icon_button__icon__delete {
+    color: $ERROR_COLOR;
+}
+
+
+.card__actions__icon_button__on_going {
+    border: 1px solid $TERTIARY_COLOR;
+}
+.card__actions__icon_button__on_going__active {
+    background-image: linear-gradient(to bottom right, $TERTIARY_COLOR, rgba(20, 168, 89, 0.5));
+}
+.card__actions__icon_button__icon__on_going {
+    color: $TERTIARY_COLOR;
+}
+
+
+.card__actions__icon_button__done {
+    border: 1px solid $SUCCESS_COLOR;
+}
+.card__actions__icon_button__done__active {
+    background-image: linear-gradient(to bottom right, $SUCCESS_COLOR, rgba(20, 168, 89, 0.5));
+}
+.card__actions__icon_button__icon__done {
+    color: $SUCCESS_COLOR;
+}
+
+.card__actions__icon_button__icon__active {
+    color: $WHITE_COLOR;
+}
+
+.card__actions__icon_button {
+    margin-right: .6rem;
+}
