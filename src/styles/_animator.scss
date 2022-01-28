@@ -65,6 +65,23 @@ $standard_animation_duration: 360ms;
 }
 
 
+
+
+@mixin blink_mx($delay: 0ms, $duration: $standard_animation_duration) {
+    animation-name: blink;
+    animation-duration: $duration;
+    animation-delay: $delay;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: backwards;
+}
+.blink_animator {
+    animation-name: blink;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+
+
 @keyframes spreadout {
     from {
         transform: scaleX(0.4);
@@ -102,6 +119,16 @@ $standard_animation_duration: 360ms;
     }
     to {
         opacity: 1;
+    }
+}
+
+
+@keyframes blink {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
     }
 }
 
