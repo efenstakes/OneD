@@ -4,6 +4,8 @@ import { Button } from '@mui/material'
 
 
 import HourglassBottomOutlined from '@mui/icons-material/HourglassBottomOutlined'
+import Add from '@mui/icons-material/Add'
+
 
 
 // components
@@ -24,10 +26,17 @@ export const NoTasksComponent = ({ showAddTaskForm }) => {
             <p>
                 You have not added any tasks yet. Click below button to add one.
             </p>
+            <VSpacerComponent space={2} />
 
             <Button
                 color='primary'
+                variant='contained'
+                size='small'
+                startIcon={<Add />}
                 onClick={showAddTaskForm}
+                style={{
+                    textTransform: 'none'
+                }}
             > 
                 Add Task 
             </Button>
