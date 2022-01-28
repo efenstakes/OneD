@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
+import moment from 'moment'
+
 
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import PauseIcon from '@mui/icons-material/Pause'
@@ -9,6 +11,8 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import DeleteIcon from '@mui/icons-material/Delete'
 import HourglassBottomOutlined from '@mui/icons-material/HourglassBottomOutlined'
+import AddIcon from '@mui/icons-material/Add'
+
 
 import { TextField, Button } from '@mui/material'
 
@@ -276,6 +280,39 @@ const HomePage = () => {
             
             
             {/* tasks */}
+            {
+                tasks.length > 0 &&
+                    <div className='tasks_header'>
+                        <h5> Tasks </h5>
+
+                        <div className='tasks_header__actions'>
+
+                            {/* add button */}
+                            {
+                                (!isAddTaskFormShown || addTaskFormTime == 0) &&
+                                    <div 
+                                        className='tasks_header__actions__add_button'
+                                        onClick={ (!isAddTaskFormShown || addTaskFormTime == 0) ? showAddTaskForm : null }
+                                    >
+                                        <AddIcon fontSize='4' className='tasks_header__actions__add_button__icon' />
+                                    </div>
+                            }
+
+                            {/* date */}
+                            <div 
+                                className='tasks_header__actions__date'
+                                onClick={ (currentSeconds > 0) ? stopTimer : null }
+                            >
+                                { moment().format("Do MMM") }
+                            </div>
+
+
+                        </div>
+                    </div>
+            }
+            {
+                tasks.length > 0 && <VSpacerComponent space={1} />
+            }
             <div className='tasks_container'>
                 {
                     tasks.map((task)=> {
@@ -306,8 +343,6 @@ const HomePage = () => {
                 tasks.length === 0 &&
                     <NoTasksComponent showAddTaskForm={showAddTaskForm} />
             }
-
-            <h1> { addTaskFormTime } </h1>
             
             <VSpacerComponent space={10} />
 

@@ -152,3 +152,60 @@
         width: 100%;
     }
 }
+
+
+.tasks_header {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+    h5 {
+        flex: 1;
+    }
+} 
+
+.tasks_header__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+    color: $WHITE_COLOR;
+
+    .tasks_header__actions__add_button {
+        height: 2rem;
+        width: 2rem;
+
+        border-radius: 50%;
+                
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background-image: linear-gradient(to bottom right, $PRIMARY_COLOR, $SECONDARY_COLOR);
+    
+        .tasks_header__actions__add_button__icon {
+            color: $WHITE_COLOR;
+        }
+    }
+
+    .tasks_header__actions__date {
+        margin-left: 1rem;
+
+        padding: .4rem 1rem;
+
+        border-radius: 8px;
+                
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-size: .72rem;
+        font-weight: bolder;
+
+        background-image: linear-gradient(to bottom right, $PRIMARY_COLOR, $SECONDARY_COLOR);
+    }
+}
