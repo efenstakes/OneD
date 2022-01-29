@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react'
 
 import moment from 'moment'
+import clsx from 'clsx'
 
 
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
 import PauseIcon from '@mui/icons-material/Pause'
 import StopIcon from '@mui/icons-material/Stop'
-import ReplayIcon from '@mui/icons-material/Replay'
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
-import DeleteIcon from '@mui/icons-material/Delete'
-import HourglassBottomOutlined from '@mui/icons-material/HourglassBottomOutlined'
 import AddIcon from '@mui/icons-material/Add'
 
 
-import { TextField, Button } from '@mui/material'
+import { TextField } from '@mui/material'
 
 
 // components
@@ -82,16 +80,17 @@ const HomePage = () => {
         console.log("add addInEditTask")
         if( inEditTask.length < 2 ) return
 
-        setTasks((state)=> {
-            return [
-                ...state,
-                {
-                    task: inEditTask,
-                    completed: false,
-                    active: false,
-                }
-            ]
-        })
+        const new_tasks = [
+            ...tasks,
+            {
+                task: inEditTask,
+                completed: false,
+                active: false,
+            }
+        ]
+
+        setTasks(new_tasks)
+        saveTasksToLS(new_tasks)
         setInEditTask('')
     }// addInEditTask
 
@@ -108,6 +107,7 @@ const HomePage = () => {
             }
         })
         setTasks(new_tasks)
+        saveTasksToLS(new_tasks)
     }// markTaskAsComplete
 
     // mark task as active
@@ -121,11 +121,14 @@ const HomePage = () => {
             }
         })
         setTasks(new_tasks)
+        saveTasksToLS(new_tasks)
     }// markTaskAsActive
 
     // mark task as inactive
     const markTaskAsInActive = (task)=> {
-        setOnGoingTask(null)
+        if ( task == onGoingTask ) {
+            setOnGoingTask(null)
+        }
         const new_tasks = tasks.map((tsk)=> {
             return {
                 ...tsk,
@@ -133,13 +136,32 @@ const HomePage = () => {
             }
         })
         setTasks(new_tasks)
+        saveTasksToLS(new_tasks)
     }// markTaskAsInActive
 
     // delete task
     const deleteTask = (task)=> {
         const new_tasks = tasks.filter((tsk)=> tsk.task != task)
         setTasks(new_tasks)
+        saveTasksToLS(new_tasks)
     }// deleteTask
+
+
+    // save data to local storage
+    const saveTasksToLS = (data)=> {
+        localStorage.setItem('oned/data', JSON.stringify(data))
+    }
+
+    // get data from local storage
+    const getTasksFromLS = ()=> {
+        const data = localStorage.getItem('oned/data')
+        return data ? JSON.parse(data) : []
+    }
+
+    // clear data from local storage
+    const clearTasksFromLS = ()=> {
+        localStorage.removeItem('oned/data')
+    }
 
 
 
@@ -167,8 +189,9 @@ const HomePage = () => {
 
 
     useEffect(()=> {
-        
-    }, [ isPaused, currentSeconds ])
+        const tsks = getTasksFromLS()
+        setTasks(tsks)
+    }, [ ])
 
     useEffect(()=> {
         // console.log("addTaskFormTime is ", addTaskFormTime)
@@ -211,7 +234,14 @@ const HomePage = () => {
                     onGoingTask &&
                         <div className='time_container__current_task fd_15'>
                             <div className='time_container__current_task__indicator__container'>
-                                <div className={ `time_container__current_task__indicator ${(!isPaused && currentSeconds > 0) ? 'blink_animator' : ''}` } />
+                                <div 
+                                    className={
+                                        clsx({
+                                            'time_container__current_task__indicator': true, 
+                                            'blink_animator': !isPaused && currentSeconds > 0 
+                                        })
+                                    } 
+                                />
                             </div>
                             <HSpacerComponent space={1} />
                             <p className='time_container__current_task__title'>
