@@ -2,12 +2,6 @@
 import clsx from 'clsx'
 
 
-import PlayArrowIcon from '@mui/icons-material/PlayArrow'
-import PauseIcon from '@mui/icons-material/Pause'
-import StopIcon from '@mui/icons-material/Stop'
-import ReplayIcon from '@mui/icons-material/Replay'
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import DeleteIcon from '@mui/icons-material/Delete'
 import HourglassBottomOutlined from '@mui/icons-material/HourglassBottomOutlined'
 

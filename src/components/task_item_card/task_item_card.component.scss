@@ -3,12 +3,14 @@
 
 
 .card {
+    position: relative;
+
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 
-    padding: 8px .8rem;
+    padding: 8px 1rem;
     margin-bottom: .5rem;
 
     border-radius: 8px;
@@ -24,10 +26,35 @@
     // background-color: rgba(17, 135, 46, .3);
     // background-image: linear-gradient(to bottom right, rgba(17, 135, 46, .5), rgba(242, 184, 75, .8));
 }
+.card_completed::before {
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: 20%;
+    bottom: 20%;
+    width: 8px;
+
+    border-radius: 4px;
+
+    background-color: rgba(17, 135, 46, .6);
+}
 
 .card_ongoing {
     // background-image: linear-gradient(to bottom, rgba(65, 217, 217, .2), rgba(65, 217, 217, .1), rgba(251, 101, 66, .1));
 }
+.card_ongoing::before {
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: 20%;
+    bottom: 20%;
+    width: 8px;
+
+    border-radius: 4px;
+
+    background-color: rgba(65, 217, 217, .6);
+}
+
 
 
 

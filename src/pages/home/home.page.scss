@@ -51,8 +51,8 @@
 
 
 .time_container__current_task__indicator__container {
-    height: .78rem;
-    width: .78rem;
+    height: .8rem;
+    width: .8rem;
     border-radius: 50%;
 
     display: flex;
@@ -66,6 +66,8 @@
     height: .6rem;
     width: .6rem;
     border-radius: 50%;
+
+    align-self: center;
 
     background-color: $PRIMARY_COLOR;
     // background-image: linear-gradient(to bottom, $TERTIARY_COLOR, $SUCCESS_COLOR);
@@ -146,7 +148,7 @@
     min-height: 60px;
     padding: 16px;
 
-    // background-color: red;
+    background-color: $WHITE_COLOR;
 
     .add_tasks_container__text_input {
         width: 100%;
@@ -200,7 +202,7 @@
 
         padding: .4rem 1rem;
 
-        border-radius: 8px;
+        border-radius: 32px;
                 
         display: flex;
         justify-content: center;
