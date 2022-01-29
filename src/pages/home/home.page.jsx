@@ -318,7 +318,7 @@ const HomePage = () => {
                 tasks.length > 0 &&
                     <div className='tasks_header'>
 
-                        <h5 className='su_2'> Tasks </h5>
+                        <h2 className='su_2'> Tasks </h2>
 
                         <div className='tasks_header__actions'>
 

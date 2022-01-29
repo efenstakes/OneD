@@ -1,0 +1,25 @@
+[debug] [2022-01-29T08:34:12.820Z] ----------------------------------------------------------------------
+[debug] [2022-01-29T08:34:12.823Z] Command:       C:\dev\nodejs\node.exe C:\Users\efen\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init hosting:github
+[debug] [2022-01-29T08:34:12.823Z] CLI Version:   9.23.1
+[debug] [2022-01-29T08:34:12.823Z] Platform:      win32
+[debug] [2022-01-29T08:34:12.824Z] Node Version:  v16.13.1
+[debug] [2022-01-29T08:34:12.826Z] Time:          Sat Jan 29 2022 11:34:12 GMT+0300 (East Africa Time)
+[debug] [2022-01-29T08:34:12.827Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-01-29T08:34:12.934Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-01-29T08:34:12.935Z] > authorizing via signed-in user (glamr.inc@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  E:\apps\LiveApps\oneD\oned
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
