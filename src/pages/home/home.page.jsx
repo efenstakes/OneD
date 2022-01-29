@@ -184,19 +184,19 @@ const HomePage = () => {
             <VSpacerComponent space={4} />
 
             {/* time container */}
-            <div className='time_container'>
+            <div className='time_container fd_2'>
 
 
                 {/* time */}
                 {
                     currentSeconds === 0 &&
-                        <p className='time_container__time'>
+                        <p className='time_container__time fd_12'>
                             00:00
                         </p>           
                 }
                 {
                     currentSeconds > 0 &&    
-                        <p className='time_container__time'>
+                        <p className='time_container__time fd_12'>
                             {
                                 parseInt(currentSeconds/60).toString().padStart(2, '0')
                             }:{""}
@@ -209,7 +209,7 @@ const HomePage = () => {
                 {/* current task */}
                 {
                     onGoingTask &&
-                        <div className='time_container__current_task'>
+                        <div className='time_container__current_task fd_15'>
                             <div className='time_container__current_task__indicator__container'>
                                 <div className={ `time_container__current_task__indicator ${(!isPaused && currentSeconds > 0) ? 'blink_animator' : ''}` } />
                             </div>
@@ -226,7 +226,7 @@ const HomePage = () => {
                 <div className="time_container__actions">
 
                     {/* pause/play */}
-                    <div className='time_container__actions__icon_button'>
+                    <div className='time_container__actions__icon_button fd_16'>
                         {
                             (!isPaused && currentSeconds > 0) &&
                                 <PauseIcon
@@ -255,7 +255,7 @@ const HomePage = () => {
 
                     {/* stop */}
                     <div 
-                        className='time_container__actions__icon_button'
+                        className='time_container__actions__icon_button fd_18'
                         onClick={ (currentSeconds > 0) ? stopTimer : null }
                     >
                         <StopIcon fontSize='4' className='time_container__actions__icon_button__icon' />
@@ -263,7 +263,7 @@ const HomePage = () => {
                     
                     {/* hide or show */}
                     <div 
-                        className='time_container__actions__icon_button'
+                        className='time_container__actions__icon_button fd_20'
                         onClick={
                             ()=> setIsTimeDisplayHidden(!isTimeDisplayHidden)
                         }
@@ -287,7 +287,8 @@ const HomePage = () => {
             {
                 tasks.length > 0 &&
                     <div className='tasks_header'>
-                        <h5> Tasks </h5>
+
+                        <h5 className='su_2'> Tasks </h5>
 
                         <div className='tasks_header__actions'>
 
@@ -295,7 +296,7 @@ const HomePage = () => {
                             {
                                 (!isAddTaskFormShown || addTaskFormTime == 0) &&
                                     <div 
-                                        className='tasks_header__actions__add_button'
+                                        className='tasks_header__actions__add_button fd_4'
                                         onClick={ (!isAddTaskFormShown || addTaskFormTime == 0) ? showAddTaskForm : null }
                                     >
                                         <AddIcon fontSize='4' className='tasks_header__actions__add_button__icon' />
@@ -304,7 +305,7 @@ const HomePage = () => {
 
                             {/* date */}
                             <div 
-                                className='tasks_header__actions__date'
+                                className='tasks_header__actions__date su_6'
                                 onClick={ (currentSeconds > 0) ? stopTimer : null }
                             >
                                 { moment().format("Do MMM") }

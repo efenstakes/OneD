@@ -23,7 +23,7 @@ const TaskItemCardComponent = ({ task, completed, isOngoing, onDelete, onOnGoing
             className={
                 clsx({
                     'card': true, 
-                    'su_2': true, 
+                    'su_6': true, 
                     'card_completed': completed,
                     'card_ongoing': isOngoing,
                 })
@@ -31,7 +31,7 @@ const TaskItemCardComponent = ({ task, completed, isOngoing, onDelete, onOnGoing
         >
 
             {/* text */}
-            <p className='card__text fd_4'>
+            <p className='card__text fd_14'>
                 {task}
             </p>
 
@@ -43,7 +43,7 @@ const TaskItemCardComponent = ({ task, completed, isOngoing, onDelete, onOnGoing
                         clsx({
                             'card__actions__icon_button': true, 
                             'card__actions__icon_button__delete': true, 
-                            'fd_6': true,
+                            'fd_16': true,
                         })
                     }
                     onClick={onDelete}
@@ -58,7 +58,7 @@ const TaskItemCardComponent = ({ task, completed, isOngoing, onDelete, onOnGoing
                             'card__actions__icon_button': true, 
                             'card__actions__icon_button__on_going': true,  
                             'card__actions__icon_button__on_going__active': isOngoing,
-                            'fd_7': true,
+                            'fd_18': true,
                         })
                     }
                     onClick={onOnGoing}
@@ -82,7 +82,7 @@ const TaskItemCardComponent = ({ task, completed, isOngoing, onDelete, onOnGoing
                             'card__actions__icon_button': true, 
                             'card__actions__icon_button__done': true,
                             'card__actions__icon_button__done__active': completed, 
-                            'fd_8': true,
+                            'fd_20': true,
                         })
                     }
                     onClick={onComplete}
