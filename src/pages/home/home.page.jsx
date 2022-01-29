@@ -98,10 +98,13 @@ const HomePage = () => {
 
     // mark task as complete
     const markTaskAsComplete = (task)=> {
+        if( task.task == onGoingTask) {
+            setOnGoingTask(null)
+        }
         const new_tasks = tasks.map((tsk)=> {
             return {
                 ...tsk,
-                completed: !tsk.completed,
+                completed: (task.task == tsk.task) ? !tsk.completed : tsk.completed,
             }
         })
         setTasks(new_tasks)
@@ -113,7 +116,8 @@ const HomePage = () => {
         const new_tasks = tasks.map((tsk)=> {
             return {
                 ...tsk,
-                active: task == tsk.task ? true : false,
+                active: (task == tsk.task) ? true : false,
+                completed: false,
             }
         })
         setTasks(new_tasks)
