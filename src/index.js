@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import { ThemeProvider } from '@mui/material'
+
 
 import reportWebVitals from './reportWebVitals'
 
@@ -8,13 +10,18 @@ import reportWebVitals from './reportWebVitals'
 import App from './App'
 
 
+// material ui setup
+import theme from './styles/theme'
+
 import './index.scss'
 
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )

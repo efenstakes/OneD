@@ -115,6 +115,8 @@
 
 // no tasks
 .no_tasks_container {
+    margin-top: 4rem;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -126,10 +128,40 @@
 
     .no_tasks_container__icon {
         color: orange;
+
         font-size: 4rem;
-        transform: rotate(130, 0);
+        
+        opacity: .6;
+        
+        transition: 200ms ease-in-out;
+        animation: shaker_kf 2s ease-in-out 5s infinite alternate both;
     }
 
+}
+
+@keyframes shaker_kf {
+    0% {
+        transform: rotate(-20deg);
+        color: $SECONDARY_COLOR;
+    }
+    5% {
+        transform: rotate(20deg);
+    }
+    10% {
+        transform: rotate(-20deg);
+        color: $PRIMARY_COLOR;
+    }
+    15% {
+        transform: rotate(20deg);
+    }
+    20% {
+        transform: rotate(0deg);
+        color: $SECONDARY_COLOR;
+    }
+    30% {
+        transform: rotate(0deg);
+        color: $PRIMARY_COLOR;
+    }
 }
 
 
@@ -213,4 +245,13 @@
 
         background-image: linear-gradient(to bottom right, $PRIMARY_COLOR, $SECONDARY_COLOR);
     }
+}
+
+
+
+.primary_button {
+    text-transform: none;
+    border-radius: 32px;
+    padding: 4px 20px;
+    background-image: linear-gradient(to bottom right, $PRIMARY_COLOR, $SECONDARY_COLOR);
 }

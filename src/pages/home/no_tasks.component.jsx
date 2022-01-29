@@ -37,9 +37,11 @@ export const NoTasksComponent = ({ showAddTaskForm }) => {
                 style={{
                     textTransform: 'none',
                     borderRadius: 32,
-                    padding: '4px 20px'
+                    padding: '4px 20px',
+                    color: 'white',
+                    boxShadow: 'none',
                 }}
-                className='su_12'
+                className='primary_button su_12'
             >
                 Add Task 
             </Button>
