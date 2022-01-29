@@ -1,5 +1,5 @@
 
-import './task_item_card.component.scss'
+import clsx from 'clsx'
 
 
 import PlayArrowIcon from '@mui/icons-material/PlayArrow'
@@ -14,12 +14,24 @@ import HourglassBottomOutlined from '@mui/icons-material/HourglassBottomOutlined
 import Done from '@mui/icons-material/Done'
 
 
+import './task_item_card.component.scss'
 
 
 const TaskItemCardComponent = ({ task, completed, isOngoing, onDelete, onOnGoing, onComplete,  }) => {
     return (
-        <div className='card'>
-            <p className='card__text'>
+        <div 
+            className={
+                clsx({
+                    'card': true, 
+                    'su_2': true, 
+                    'card_completed': completed,
+                    'card_ongoing': isOngoing,
+                })
+            }
+        >
+
+            {/* text */}
+            <p className='card__text fd_4'>
                 {task}
             </p>
 
@@ -27,26 +39,64 @@ const TaskItemCardComponent = ({ task, completed, isOngoing, onDelete, onOnGoing
 
                 {/* delete */}
                 <div 
-                    className='card__actions__icon_button card__actions__icon_button__delete'
+                    className={
+                        clsx({
+                            'card__actions__icon_button': true, 
+                            'card__actions__icon_button__delete': true, 
+                            'fd_6': true,
+                        })
+                    }
                     onClick={onDelete}
                 >
                     <DeleteIcon fontSize='4' className='card__actions__icon_button__icon card__actions__icon_button__icon__delete' />
                 </div>
 
                 {/* on going */}
-                <div 
-                    className='card__actions__icon_button card__actions__icon_button__on_going'
+                <div
+                    className={
+                        clsx({
+                            'card__actions__icon_button': true, 
+                            'card__actions__icon_button__on_going': true,  
+                            'card__actions__icon_button__on_going__active': isOngoing,
+                            'fd_7': true,
+                        })
+                    }
                     onClick={onOnGoing}
                 >
-                    <HourglassBottomOutlined fontSize='4' className='card__actions__icon_button__icon card__actions__icon_button__icon__on_going' />
+                    <HourglassBottomOutlined 
+                        fontSize='4' 
+                        className={
+                            clsx({
+                                'card__actions__icon_button__icon': true, 
+                                'card__actions__icon_button__icon__on_going': true, 
+                                'card__actions__icon_button__icon__active': isOngoing, 
+                            })
+                        } 
+                    />
                 </div>
                 
                 {/* done */}
                 <div 
-                    className='card__actions__icon_button card__actions__icon_button__done'
+                    className={
+                        clsx({
+                            'card__actions__icon_button': true, 
+                            'card__actions__icon_button__done': true,
+                            'card__actions__icon_button__done__active': completed, 
+                            'fd_8': true,
+                        })
+                    }
                     onClick={onComplete}
                 >
-                    <Done fontSize='4' className='card__actions__icon_button__icon card__actions__icon_button__icon__done' />
+                    <Done 
+                        fontSize='4' 
+                        className={
+                            clsx({
+                                'card__actions__icon_button__icon': true, 
+                                'card__actions__icon_button__icon__done': true,
+                                'card__actions__icon_button__icon__active': completed, 
+                            })
+                        } 
+                    />
                 </div>
 
             </div>

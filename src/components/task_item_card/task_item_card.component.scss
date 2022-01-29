@@ -20,6 +20,18 @@
     }
 }
 
+.card_completed {
+    // background-color: rgba(17, 135, 46, .3);
+    // background-image: linear-gradient(to bottom right, rgba(17, 135, 46, .5), rgba(242, 184, 75, .8));
+}
+
+.card_ongoing {
+    // background-image: linear-gradient(to bottom, rgba(65, 217, 217, .2), rgba(65, 217, 217, .1), rgba(251, 101, 66, .1));
+}
+
+
+
+
 .card__text {
     flex: 1;
     font-size: .8rem;
@@ -47,7 +59,9 @@
     
 
     background-color: $WHITE_COLOR;
-    color: red;
+    
+    
+    cursor: pointer;
 }
 
 
@@ -67,7 +81,7 @@
     border: 1px solid $TERTIARY_COLOR;
 }
 .card__actions__icon_button__on_going__active {
-    background-image: linear-gradient(to bottom right, $TERTIARY_COLOR, rgba(20, 168, 89, 0.5));
+    background-image: linear-gradient(to bottom, $TERTIARY_COLOR, rgba(20, 168, 89, 0.5));
 }
 .card__actions__icon_button__icon__on_going {
     color: $TERTIARY_COLOR;
