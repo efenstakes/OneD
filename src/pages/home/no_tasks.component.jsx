@@ -20,7 +20,7 @@ export const NoTasksComponent = ({ showAddTaskForm }) => {
             <HourglassBottomOutlined fontSize='8' className='no_tasks_container__icon su_2' />
             <VSpacerComponent space={2} />
 
-            <h4 className='su_8'> No Tasks </h4>
+            <h3 className='su_8'> No Tasks </h3>
             <VSpacerComponent space={.5} />
 
             <p className='su_10'>

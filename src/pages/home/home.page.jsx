@@ -12,7 +12,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import AddIcon from '@mui/icons-material/Add'
 
 
-import { TextField } from '@mui/material'
+import { TextField, Button } from '@mui/material'
 
 
 // components
@@ -20,7 +20,7 @@ import HSpacerComponent from '../../components/h_spacer/h_spacer.component'
 import VSpacerComponent from '../../components/v_spacer/v_spacer.component'
 import TaskItemCardComponent from '../../components/task_item_card/task_item_card.component'
 import { NoTasksComponent } from './no_tasks.component'
-
+import { DayEndComponent } from './day_end.component'
 
 
 import './home.page.scss'
@@ -28,10 +28,11 @@ import './home.page.scss'
 
 
 const HomePage = () => {
-    let [title, setTitle] = useState()
     let [tasks, setTasks] = useState([])
     let [inEditTask, setInEditTask] = useState('')
     let [onGoingTask, setOnGoingTask] = useState()
+
+    const [isDayEnd, setIsDayEnd] = useState(false)
     
 
     let [timerRef, setTimerRef] = useState(null)
@@ -97,13 +98,13 @@ const HomePage = () => {
 
     // mark task as complete
     const markTaskAsComplete = (task)=> {
-        if( task.task == onGoingTask) {
+        if( task.task === onGoingTask) {
             setOnGoingTask(null)
         }
         const new_tasks = tasks.map((tsk)=> {
             return {
                 ...tsk,
-                completed: (task.task == tsk.task) ? !tsk.completed : tsk.completed,
+                completed: (task.task === tsk.task) ? !tsk.completed : tsk.completed,
             }
         })
         setTasks(new_tasks)
@@ -116,7 +117,7 @@ const HomePage = () => {
         const new_tasks = tasks.map((tsk)=> {
             return {
                 ...tsk,
-                active: (task == tsk.task) ? true : false,
+                active: (task === tsk.task) ? true : false,
                 completed: false,
             }
         })
@@ -126,13 +127,13 @@ const HomePage = () => {
 
     // mark task as inactive
     const markTaskAsInActive = (task)=> {
-        if ( task == onGoingTask ) {
+        if ( task === onGoingTask ) {
             setOnGoingTask(null)
         }
         const new_tasks = tasks.map((tsk)=> {
             return {
                 ...tsk,
-                active: task == tsk.task ? false : true,
+                active: task === tsk.task ? false : true,
             }
         })
         setTasks(new_tasks)
@@ -145,6 +146,16 @@ const HomePage = () => {
         setTasks(new_tasks)
         saveTasksToLS(new_tasks)
     }// deleteTask
+
+
+    // end my day
+    // delete tasks
+    // hide ui
+    const endMyDay = ()=> {
+        setTasks([])
+        clearTasksFromLS()
+        setIsDayEnd(true)
+    }// endMyDay
 
 
     // save data to local storage
@@ -201,6 +212,12 @@ const HomePage = () => {
     }, [ addTaskFormTime ])
     
 
+
+    if ( isDayEnd ) {
+        return (
+            <DayEndComponent />
+        )
+    }
     return (
         <div className='page'>
 
@@ -324,10 +341,10 @@ const HomePage = () => {
 
                             {/* add button */}
                             {
-                                (!isAddTaskFormShown || addTaskFormTime == 0) &&
+                                (!isAddTaskFormShown || addTaskFormTime === 0) &&
                                     <div 
                                         className='tasks_header__actions__add_button fd_4'
-                                        onClick={ (!isAddTaskFormShown || addTaskFormTime == 0) ? showAddTaskForm : null }
+                                        onClick={ (!isAddTaskFormShown || addTaskFormTime === 0) ? showAddTaskForm : null }
                                     >
                                         <AddIcon fontSize='4' className='tasks_header__actions__add_button__icon' />
                                     </div>
@@ -351,10 +368,11 @@ const HomePage = () => {
             <div className='tasks_container'>
                 {
                     tasks.map((task)=> {
-                        const isOngoing = task.task == onGoingTask
+                        const isOngoing = task.task === onGoingTask
 
                         return (
                             <TaskItemCardComponent
+                                key={task.task}
                                 task={task.task}
                                 completed={task.completed}
                                 isOngoing={isOngoing}
@@ -379,12 +397,12 @@ const HomePage = () => {
                     <NoTasksComponent showAddTaskForm={showAddTaskForm} />
             }
             
-            <VSpacerComponent space={10} />
+            <VSpacerComponent space={15} />
 
             {/* add tasks */}
             {
                 isAddTaskFormShown && addTaskFormTime > 0 &&
-                    <div className='add_tasks_container'>
+                    <div className='add_tasks_container page'>
                         <TextField
                             value={inEditTask}
                             placeholder='Enter task name...'
@@ -396,13 +414,38 @@ const HomePage = () => {
                             }
                             onKeyDown={
                                 (e)=> {
-                                    if(e.code == "Enter") {
+                                    if(e.code === "Enter") {
                                         addInEditTask()
                                     }
                                 }
                             }
+                            style={{
+                                padding: '0px 12px',
+                                borderRadius: '0px',
+                            }}
                             className='add_tasks_container__text_input'
                         />
+                    </div>
+            }
+            {
+                ((!isAddTaskFormShown || addTaskFormTime === 0) && tasks.length > 0) &&
+                    <div className='fab_container'>
+                        <Button
+                            color='primary'
+                            variant='contained'
+                            size='small'
+                            onClick={endMyDay}
+                            style={{
+                                textTransform: 'none',
+                                borderRadius: 32,
+                                padding: '4px 20px',
+                                color: 'white',
+                                boxShadow: 'none',
+                            }}
+                            className='primary_button primary_fab_button su_12'
+                        >
+                            End My Day 
+                        </Button>
                     </div>
             }
 

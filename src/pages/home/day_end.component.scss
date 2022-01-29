@@ -1,0 +1,25 @@
+@import '../../styles/commons';
+
+
+
+.page_day_end {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-image: linear-gradient(to bottom right, $PRIMARY_COLOR, $SECONDARY_COLOR);
+    color: rgba(1, 1, 1, .7);
+
+
+    h2 {
+        font-weight: 900;
+    }
+}
+
+.page_day_end__icon {
+    font-size: 4rem;
+}
