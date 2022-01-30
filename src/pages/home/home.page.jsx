@@ -113,7 +113,7 @@ const HomePage = () => {
             return {
                 ...tsk,
                 active: (task === tsk.task) ? true : false,
-                completed: false,
+                completed: (task === tsk.task) ? false : tsk.completed,
             }
         })
         setTasks(new_tasks)
