@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 import clsx from 'clsx'
@@ -22,7 +22,35 @@ import './time_display.component.scss'
 
 
 const TimeDisplayComponent = ({ currentSeconds, onGoingTask, isPaused, isFullScreen, setIsFullScreen, startTimer, pauseTimer, resumeTimer, stopTimer, }) => {
-  return (
+    const ref = useRef()
+  
+    const openFullscreen = ()=> {
+        if( !ref || !ref?.current ) {
+            console.log("ref is empty")
+            return
+        }
+        console.log("ref.current ", ref.current)
+        console.log("ref ", ref)
+        if (ref.current.requestFullscreen) {
+            console.log("we in biz")
+            ref.current.requestFullscreen();
+        } else if (ref.current.webkitRequestFullscreen) { /* Safari */
+            ref.current.webkitRequestFullscreen();
+        } else if (ref.current.msRequestFullscreen) { /* IE11 */
+            ref.current.msRequestFullscreen();
+        }
+    }
+
+
+    useEffect(() => {
+        // if( isFullScreen ) {
+        //     ref.current.exitFullScreen()
+        // } else {
+        //     openFullscreen()
+        // }
+    }, [ isFullScreen ])
+  
+   return (
     <div 
         className={
             clsx({
@@ -31,6 +59,7 @@ const TimeDisplayComponent = ({ currentSeconds, onGoingTask, isPaused, isFullScr
                 'fd_2': true,
             })
         }
+        ref={ref}
     >
 
         {/* time */}

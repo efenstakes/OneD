@@ -14,11 +14,11 @@ import VSpacerComponent from '../../components/v_spacer/v_spacer.component'
 import TaskItemCardComponent from '../../components/task_item_card/task_item_card.component'
 import { NoTasksComponent } from './no_tasks.component'
 import { DayEndComponent } from './day_end.component'
+import TimeDisplayComponent from './time_display.component'
+import QuoteOfTheDayComponent from './quote_of_the_day.component'
 
 
 import './home.page.scss'
-import TimeDisplayComponent from './time_display.component'
-
 
 
 const HomePage = () => {
@@ -234,6 +234,8 @@ const HomePage = () => {
             />
             <VSpacerComponent space={8} />
             
+            <QuoteOfTheDayComponent />
+            <VSpacerComponent space={8} />
             
             {/* tasks */}
             {
