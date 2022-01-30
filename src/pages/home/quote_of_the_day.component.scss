@@ -1,0 +1,19 @@
+@import "../../styles/theme.scss";
+
+
+
+.quote_container {
+    padding: 4rem 0;
+
+    // background-color: rgba(38, 38, 38, .05); // rgba(242, 184, 75, .05);
+    border-radius: 12px;
+
+    p {
+        text-align: center;
+        font-size: 1.6rem;
+        font-weight: 900;
+
+        opacity: .4;
+    }
+}
+
