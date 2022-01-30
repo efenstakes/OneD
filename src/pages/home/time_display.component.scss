@@ -1,0 +1,137 @@
+@import "../../styles/theme.scss";
+
+
+$TIMER_TEXTURES_COLOR: rgba($color: #1e1e1e, $alpha: .8); // $WHITE_COLOR;
+
+.time_container {
+    width: 100%;
+
+    padding: 3rem 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border-radius: 12px;
+
+    color: $TIMER_TEXTURES_COLOR;
+    background-image: linear-gradient(to bottom right, $PRIMARY_COLOR, $SECONDARY_COLOR);
+
+    transition: 300ms;
+}
+
+
+.time_container__fullscreen {
+    width: 100%;
+    height: 100vh;
+
+    border-radius: 0;
+
+    justify-content: center;
+
+
+    .time_container__time {
+        font-size: 6.4rem;
+    }
+
+    .time_container__actions__icon_button__icon {
+        transform: scale(1.2);
+    }
+
+}
+
+.time_container__time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 4.6rem;
+    font-weight: 600;
+
+
+    // font-family: 'Oswald';
+    @media screen and (min-width: 880px) {
+        // font-size: 4.8rem;
+    }
+}
+
+.time_container__current_task {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    max-width: 560px;
+}
+
+
+
+.time_container__current_task__indicator__container {
+    height: .8rem;
+    width: .8rem;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: $TIMER_TEXTURES_COLOR;
+}
+
+.time_container__current_task__indicator {
+    height: .6rem;
+    width: .6rem;
+    border-radius: 50%;
+
+    align-self: center;
+
+    background-color: $WHITE_COLOR;
+    // background-image: linear-gradient(to bottom, $TERTIARY_COLOR, $SUCCESS_COLOR);
+}
+
+
+.time_container__current_task__title {
+    text-align: center;
+}
+
+
+
+.time_container__actions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    min-width: 160px;
+    max-width: 300px;
+
+    @media screen and (min-width: 880px) {
+        min-width: 240px;
+        max-width: 480px;
+    }
+}
+
+
+.time_container__actions__icon_button {
+    height: 2.1rem;
+    width: 2.1rem;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+    background-color: $TIMER_TEXTURES_COLOR;
+    // border: 3px solid $SECONDARY_COLOR;
+
+    @media screen and (min-width: 880px) {
+        height: 2.8rem;
+        width: 2.8rem;
+    }
+}
+
+
+.time_container__actions__icon_button__icon {
+    // color: orange;
+    color: $WHITE_COLOR;
+}
+
