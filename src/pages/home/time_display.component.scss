@@ -6,7 +6,7 @@ $TIMER_TEXTURES_COLOR: rgba($color: #1e1e1e, $alpha: .8); // $WHITE_COLOR;
 .time_container {
     width: 100%;
 
-    padding: 3rem 0;
+    padding: 3rem 2rem;
 
     display: flex;
     flex-direction: column;
@@ -32,6 +32,12 @@ $TIMER_TEXTURES_COLOR: rgba($color: #1e1e1e, $alpha: .8); // $WHITE_COLOR;
 
     .time_container__time {
         font-size: 6.4rem;
+
+        
+        // font-family: 'Oswald';
+        @media screen and (min-width: 880px) {
+            font-size: 8.9rem;
+        }
     }
 
     .time_container__actions__icon_button__icon {
@@ -66,15 +72,15 @@ $TIMER_TEXTURES_COLOR: rgba($color: #1e1e1e, $alpha: .8); // $WHITE_COLOR;
 
 
 .time_container__current_task__indicator__container {
-    height: .8rem;
-    width: .8rem;
+    height: .8em;
+    width: .8em;
     border-radius: 50%;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    background-color: $TIMER_TEXTURES_COLOR;
+    background-color: $WHITE_COLOR;
 }
 
 .time_container__current_task__indicator {
@@ -84,13 +90,13 @@ $TIMER_TEXTURES_COLOR: rgba($color: #1e1e1e, $alpha: .8); // $WHITE_COLOR;
 
     align-self: center;
 
-    background-color: $WHITE_COLOR;
-    // background-image: linear-gradient(to bottom, $TERTIARY_COLOR, $SUCCESS_COLOR);
+    // background-color: $WHITE_COLOR;
+    background-image: linear-gradient(to bottom, $SECONDARY_COLOR, $PRIMARY_COLOR);
 }
 
 
 .time_container__current_task__title {
-    text-align: center;
+    text-align: left;
 }
 
 

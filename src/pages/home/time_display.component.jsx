@@ -36,24 +36,20 @@ const TimeDisplayComponent = ({ currentSeconds, onGoingTask, isPaused, isFullScr
         {/* time */}
         {
             currentSeconds === 0 &&
-                <p className='time_container__time fd_12'>
+                <div className='time_container__time fd_12'>
                     00:00
-                </p>           
+                </div>           
         }
         {
             currentSeconds > 0 &&    
                 <div className='time_container__time fd_12'>
-                    <p>
-                        {
-                            parseInt(currentSeconds/60).toString().padStart(2, '0')
-                        }
-                    </p>
-                    <p style={{ marginTop: '-4px' }}>:</p>
-                    <p>
-                        { 
-                            parseInt(currentSeconds%60).toString().padStart(2, '0') 
-                        }
-                    </p>
+                    {
+                        parseInt(currentSeconds/60).toString().padStart(2, '0')
+                    }
+                    :
+                    { 
+                        parseInt(currentSeconds%60).toString().padStart(2, '0') 
+                    }
                 </div>
         }
         
@@ -71,7 +67,7 @@ const TimeDisplayComponent = ({ currentSeconds, onGoingTask, isPaused, isFullScr
                             } 
                         />
                     </div>
-                    <HSpacerComponent space={1} />
+                    <HSpacerComponent space={1.6} />
                     <p className='time_container__current_task__title'>
                         { onGoingTask }
                     </p>
