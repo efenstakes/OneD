@@ -234,6 +234,7 @@ const HomePage = () => {
             />
             <VSpacerComponent space={8} />
             
+            
             <QuoteOfTheDayComponent />
             <VSpacerComponent space={8} />
             

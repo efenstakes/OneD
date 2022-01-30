@@ -3,17 +3,42 @@
 
 
 .quote_container {
+    position: relative;
+
     padding: 4rem 0;
 
     // background-color: rgba(38, 38, 38, .05); // rgba(242, 184, 75, .05);
     border-radius: 12px;
+
+    h1 {
+        text-align: center;
+
+        font-size: 6rem;
+        font-weight: bold;
+        color: $PRIMARY_COLOR;
+        opacity: .4;
+    }
 
     p {
         text-align: center;
         font-size: 1.6rem;
         font-weight: 900;
 
-        opacity: .4;
+        // color: $PRIMARY_COLOR;
+        opacity: .6;
     }
+}
+
+.quote_container::before {
+    // content: "Quote";
+
+    // position: absolute;
+    // top: -14%;
+    // left: 40%;
+
+    // font-size: 4rem;
+    // font-weight: bold;
+    // color: $BLACK_COLOR;
+    // opacity: .1;
 }
 
