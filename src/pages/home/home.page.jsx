@@ -217,7 +217,7 @@ const HomePage = () => {
         <div className={clsx({ 'page': true, 'page__plain': isTimeDisplayFullScreen })}>
 
             {
-                !isTimeDisplayFullScreen && <VSpacerComponent space={4} />
+                !isTimeDisplayFullScreen && <VSpacerComponent space={8} />
             }
 
             {/* time container */}
