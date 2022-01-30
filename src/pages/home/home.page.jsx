@@ -3,12 +3,6 @@ import React, { useState, useEffect } from 'react'
 import moment from 'moment'
 import clsx from 'clsx'
 
-
-import PlayArrowIcon from '@mui/icons-material/PlayArrow'
-import PauseIcon from '@mui/icons-material/Pause'
-import StopIcon from '@mui/icons-material/Stop'
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import AddIcon from '@mui/icons-material/Add'
 
 
@@ -16,7 +10,6 @@ import { TextField, Button } from '@mui/material'
 
 
 // components
-import HSpacerComponent from '../../components/h_spacer/h_spacer.component'
 import VSpacerComponent from '../../components/v_spacer/v_spacer.component'
 import TaskItemCardComponent from '../../components/task_item_card/task_item_card.component'
 import { NoTasksComponent } from './no_tasks.component'
@@ -24,6 +17,7 @@ import { DayEndComponent } from './day_end.component'
 
 
 import './home.page.scss'
+import TimeDisplayComponent from './time_display.component'
 
 
 
@@ -41,6 +35,7 @@ const HomePage = () => {
     let [isPaused, setIsPaused] = useState(false)
 
     let [isTimeDisplayHidden, setIsTimeDisplayHidden] = useState(false)
+    let [ isTimeDisplayFullScreen, setIsTimeDisplayFullScreen ] = useState(false)
 
     let [isAddTaskFormShown, setIsAddTaskFormShown] = useState(false)
     let [addTaskFormTime, setAddTaskFormTime] = useState(0)
@@ -219,114 +214,24 @@ const HomePage = () => {
         )
     }
     return (
-        <div className='page'>
+        <div className={clsx({ 'page': true, 'page__plain': isTimeDisplayFullScreen })}>
 
-            <VSpacerComponent space={4} />
+            {
+                !isTimeDisplayFullScreen && <VSpacerComponent space={4} />
+            }
 
             {/* time container */}
-            <div className='time_container fd_2'>
-
-
-                {/* time */}
-                {
-                    currentSeconds === 0 &&
-                        <p className='time_container__time fd_12'>
-                            00:00
-                        </p>           
-                }
-                {
-                    currentSeconds > 0 &&    
-                        <p className='time_container__time fd_12'>
-                            {
-                                parseInt(currentSeconds/60).toString().padStart(2, '0')
-                            }:{""}
-                            { 
-                                parseInt(currentSeconds%60).toString().padStart(2, '0') 
-                            }
-                        </p>
-                }
-                
-                {/* current task */}
-                {
-                    onGoingTask &&
-                        <div className='time_container__current_task fd_15'>
-                            <div className='time_container__current_task__indicator__container'>
-                                <div 
-                                    className={
-                                        clsx({
-                                            'time_container__current_task__indicator': true, 
-                                            'blink_animator': !isPaused && currentSeconds > 0 
-                                        })
-                                    } 
-                                />
-                            </div>
-                            <HSpacerComponent space={1} />
-                            <p className='time_container__current_task__title'>
-                                { onGoingTask }
-                            </p>
-                        </div>
-                }
-
-                <VSpacerComponent space={4} />
-
-                {/* actions */}
-                <div className="time_container__actions">
-
-                    {/* pause/play */}
-                    <div className='time_container__actions__icon_button fd_16'>
-                        {
-                            (!isPaused && currentSeconds > 0) &&
-                                <PauseIcon
-                                    fontSize='2' 
-                                    className='time_container__actions__icon_button__icon'
-                                    onClick={pauseTimer}
-                                />
-                        }
-                        {
-                            (isPaused && currentSeconds > 0) &&
-                                <PlayArrowIcon 
-                                    fontSize='2' 
-                                    className='time_container__actions__icon_button__icon' 
-                                    onClick={resumeTimer}
-                                />
-                        }
-                        {
-                            currentSeconds === 0 && 
-                                <PlayArrowIcon 
-                                    fontSize='2' 
-                                    className='time_container__actions__icon_button__icon' 
-                                    onClick={startTimer}
-                                />
-                        }
-                    </div>
-
-                    {/* stop */}
-                    <div 
-                        className='time_container__actions__icon_button fd_18'
-                        onClick={ (currentSeconds > 0) ? stopTimer : null }
-                    >
-                        <StopIcon fontSize='4' className='time_container__actions__icon_button__icon' />
-                    </div>
-                    
-                    {/* hide or show */}
-                    <div 
-                        className='time_container__actions__icon_button fd_20'
-                        onClick={
-                            ()=> setIsTimeDisplayHidden(!isTimeDisplayHidden)
-                        }
-                    >
-                        {
-                            isTimeDisplayHidden && <VisibilityOffIcon fontSize='4' className='time_container__actions__icon_button__icon' />
-                        }
-                        {
-                            !isTimeDisplayHidden && <RemoveRedEyeIcon fontSize='4' className='time_container__actions__icon_button__icon' />
-                        }
-                    </div>
-
-                </div>
-                
-
-            </div>
+            <TimeDisplayComponent
+                currentSeconds={currentSeconds}
+                isPaused={isPaused}
+                onGoingTask={onGoingTask}
+                isFullScreen={isTimeDisplayFullScreen}
+                setIsFullScreen={setIsTimeDisplayFullScreen}
+                startTimer={startTimer}
+                pauseTimer={pauseTimer}
+                resumeTimer={resumeTimer}
+                stopTimer={stopTimer}
+            />
             <VSpacerComponent space={8} />
             
             
@@ -401,7 +306,7 @@ const HomePage = () => {
 
             {/* add tasks */}
             {
-                isAddTaskFormShown && addTaskFormTime > 0 &&
+                (isAddTaskFormShown && addTaskFormTime > 0 && !isTimeDisplayFullScreen) &&
                     <div className='add_tasks_container page'>
                         <TextField
                             value={inEditTask}
@@ -428,7 +333,7 @@ const HomePage = () => {
                     </div>
             }
             {
-                ((!isAddTaskFormShown || addTaskFormTime === 0) && tasks.length > 0) &&
+                ((!isAddTaskFormShown || addTaskFormTime === 0) && !isTimeDisplayFullScreen && tasks.length > 0) &&
                     <div className='fab_container'>
                         <Button
                             color='primary'
