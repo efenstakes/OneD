@@ -268,7 +268,7 @@ const HomePage = () => {
                     </div>
             }
             {
-                tasks.length > 0 && <VSpacerComponent space={1} />
+                tasks.length > 0 && <VSpacerComponent space={2.5} />
             }
             <div className='tasks_container'>
                 {

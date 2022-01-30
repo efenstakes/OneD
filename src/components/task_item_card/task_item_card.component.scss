@@ -65,14 +65,15 @@
 
 .card__text {
     flex: 1;
-    font-size: .96rem;
+    font-size: 1.1rem;
+    text-align: left;
 
     color: $BLACK_COLOR;
 
     max-width: 80%;
     
     @media screen and (min-width: 880px) {
-        font-size: 1.2rem;
+        font-size: 1.36rem;
     }
 }
 
