@@ -23,57 +23,6 @@
 
 
 
-// no tasks
-.no_tasks_container {
-    margin-top: 4rem;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    p {
-        font-size: .8rem;
-        text-align: center;
-    }
-
-    .no_tasks_container__icon {
-        color: orange;
-
-        font-size: 4rem;
-
-        opacity: .6;
-        
-        transition: 200ms ease-in-out;
-        animation: shaker_kf 2s ease-in-out 5s infinite alternate both;
-    }
-
-}
-
-@keyframes shaker_kf {
-    0% {
-        transform: rotate(-20deg);
-        color: $SECONDARY_COLOR;
-    }
-    5% {
-        transform: rotate(20deg);
-    }
-    10% {
-        transform: rotate(-20deg);
-        color: $PRIMARY_COLOR;
-    }
-    15% {
-        transform: rotate(20deg);
-    }
-    20% {
-        transform: rotate(0deg);
-        color: $SECONDARY_COLOR;
-    }
-    30% {
-        transform: rotate(0deg);
-        color: $PRIMARY_COLOR;
-    }
-}
-
 
 // add tasks
 

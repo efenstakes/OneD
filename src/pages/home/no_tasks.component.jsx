@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { Button } from '@mui/material'
 
@@ -12,21 +13,24 @@ import Add from '@mui/icons-material/Add'
 import VSpacerComponent from '../../components/v_spacer/v_spacer.component'
 
 
+import './no_tasks.component.scss'
+
+
 
 export const NoTasksComponent = ({ showAddTaskForm }) => {
     return (
         <div className='no_tasks_container'>
 
-            <HourglassBottomOutlined fontSize='8' className='no_tasks_container__icon su_2' />
-            <VSpacerComponent space={2} />
+            <HourglassBottomOutlined fontSize='8' className='no_tasks_container__icon' />
+            <VSpacerComponent space={2.5} />
 
-            <h3 className='su_8'> No Tasks </h3>
+            <h2 className='su_8'> No Tasks </h2>
             <VSpacerComponent space={.5} />
 
             <p className='su_10'>
                 You have not added any tasks yet. Click below button to add one.
             </p>
-            <VSpacerComponent space={2} />
+            <VSpacerComponent space={2.5} />
 
             <Button
                 color='primary'
@@ -48,4 +52,8 @@ export const NoTasksComponent = ({ showAddTaskForm }) => {
 
         </div>
     )
+}
+
+NoTasksComponent.propTypes = {
+    showAddTaskForm: PropTypes.func.isRequired,
 }
