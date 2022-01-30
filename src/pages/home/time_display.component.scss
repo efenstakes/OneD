@@ -29,8 +29,10 @@ $TIMER_TEXTURES_COLOR: rgba($color: #1e1e1e, $alpha: .8); // $WHITE_COLOR;
 
     justify-content: center;
 
-    padding-top: -10vh;
 
+    @media screen and (min-width: 600px) {
+        padding-top: -10vh;
+    }
 
     .time_container__time {
         font-size: 6.4rem;
