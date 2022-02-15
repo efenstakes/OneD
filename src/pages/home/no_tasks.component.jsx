@@ -36,16 +36,16 @@ export const NoTasksComponent = ({ showAddTaskForm }) => {
                 color='primary'
                 variant='contained'
                 size='small'
-                startIcon={<Add />}
+                startIcon={<Add fontSize='20' />}
                 onClick={showAddTaskForm}
                 style={{
                     textTransform: 'none',
                     borderRadius: 32,
-                    padding: '4px 20px',
+                    padding: '.4rem 1.6rem',
                     color: 'white',
                     boxShadow: 'none',
                 }}
-                className='primary_button su_12'
+                className='primary_button add_task_button su_12'
             >
                 Add Task 
             </Button>

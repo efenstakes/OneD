@@ -346,7 +346,7 @@ const HomePage = () => {
                             style={{
                                 textTransform: 'none',
                                 borderRadius: 32,
-                                padding: '4px 20px',
+                                padding: '.4rem 1.6rem',
                                 color: 'white',
                                 boxShadow: 'none',
                             }}
