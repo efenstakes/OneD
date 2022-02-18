@@ -22,24 +22,23 @@ import './home.page.scss'
 
 
 const HomePage = () => {
-    let [tasks, setTasks] = useState([])
-    let [inEditTask, setInEditTask] = useState('')
-    let [onGoingTask, setOnGoingTask] = useState()
+    let [ tasks, setTasks ] = useState([])
+    let [ inEditTask, setInEditTask ] = useState('')
+    let [ onGoingTask, setOnGoingTask ] = useState()
 
-    const [isDayEnd, setIsDayEnd] = useState(false)
+    const [ isDayEnd, setIsDayEnd ] = useState(false)
     
 
-    let [timerRef, setTimerRef] = useState(null)
+    let [ timerRef, setTimerRef ] = useState(null)
 
-    let [currentSeconds, setCurrentSeconds] = useState(0)
-    let [isPaused, setIsPaused] = useState(false)
+    let  [ currentSeconds, setCurrentSeconds ] = useState(0)
+    let [ isPaused, setIsPaused ] = useState(false)
 
-    let [isTimeDisplayHidden, setIsTimeDisplayHidden] = useState(false)
     let [ isTimeDisplayFullScreen, setIsTimeDisplayFullScreen ] = useState(false)
 
-    let [isAddTaskFormShown, setIsAddTaskFormShown] = useState(false)
-    let [addTaskFormTime, setAddTaskFormTime] = useState(0)
-    let [addTaskFormTimerRef, setAddTaskFormTimerRef] = useState(null)
+    let [ isAddTaskFormShown, setIsAddTaskFormShown ] = useState(false)
+    let [ addTaskFormTime, setAddTaskFormTime ] = useState(0)
+    let [ addTaskFormTimerRef, setAddTaskFormTimerRef ] = useState(null)
 
 
 
@@ -137,7 +136,7 @@ const HomePage = () => {
 
     // delete task
     const deleteTask = (task)=> {
-        const new_tasks = tasks.filter((tsk)=> tsk.task != task)
+        const new_tasks = tasks.filter((tsk)=> tsk.task !== task)
         setTasks(new_tasks)
         saveTasksToLS(new_tasks)
     }// deleteTask
@@ -236,7 +235,7 @@ const HomePage = () => {
             
             
             <QuoteOfTheDayComponent />
-            <VSpacerComponent space={8} />
+            <VSpacerComponent space={4} />
             
             {/* tasks */}
             {
@@ -266,45 +265,46 @@ const HomePage = () => {
                                 { moment().format("Do MMM") }
                             </div>
 
-
                         </div>
                     </div>
             }
             {
                 tasks.length > 0 && <VSpacerComponent space={2.5} />
             }
-            <div className='tasks_container'>
-                {
-                    tasks.map((task)=> {
-                        const isOngoing = task.task === onGoingTask
+            {
+                tasks.length > 0 &&
+                    <div className='tasks_container'>
+                    {
+                        tasks.map((task)=> {
+                            const isOngoing = task.task === onGoingTask
 
-                        return (
-                            <TaskItemCardComponent
-                                key={task.task}
-                                task={task.task}
-                                completed={task.completed}
-                                isOngoing={isOngoing}
-                                onComplete={
-                                    ()=> markTaskAsComplete(task)
-                                }
-                                onOnGoing={
-                                    ()=> isOngoing 
-                                            ? markTaskAsInActive(task.task) 
-                                            : markTaskAsActive(task.task)
-                                }
-                                onDelete={
-                                    ()=> deleteTask(task.task)
-                                }
-                            />
-                        )
-                    })
-                }
-            </div>
+                            return (
+                                <TaskItemCardComponent
+                                    key={task.task}
+                                    task={task.task}
+                                    completed={task.completed}
+                                    isOngoing={isOngoing}
+                                    onComplete={
+                                        ()=> markTaskAsComplete(task)
+                                    }
+                                    onOnGoing={
+                                        ()=> isOngoing 
+                                                ? markTaskAsInActive(task.task) 
+                                                : markTaskAsActive(task.task)
+                                    }
+                                    onDelete={
+                                        ()=> deleteTask(task.task)
+                                    }
+                                />
+                            )
+                        })
+                    }
+                </div>
+            }
             {
                 tasks.length === 0 &&
                     <NoTasksComponent showAddTaskForm={showAddTaskForm} />
-            }
-            
+            }  
             <VSpacerComponent space={15} />
 
             {/* add tasks */}
@@ -356,7 +356,6 @@ const HomePage = () => {
                         </Button>
                     </div>
             }
-
 
         </div>
     )

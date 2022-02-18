@@ -25,7 +25,7 @@ export const NoTasksComponent = ({ showAddTaskForm }) => {
             <VSpacerComponent space={2.5} />
 
             <h2 className='su_8'> No Tasks </h2>
-            <VSpacerComponent space={.5} />
+            <VSpacerComponent space={1} />
 
             <p className='su_10'>
                 You have not added any tasks yet. Click below button to add one.

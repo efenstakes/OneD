@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import VSpacerComponent from '../../components/v_spacer/v_spacer.component'
+// import VSpacerComponent from '../../components/v_spacer/v_spacer.component'
 
 
 import './quote_of_the_day.component.scss'
-
 
 const Quote = require('inspirational-quotes')
 
