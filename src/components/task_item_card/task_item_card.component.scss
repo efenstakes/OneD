@@ -45,6 +45,8 @@
     // background-image: linear-gradient(to bottom, rgba(65, 217, 217, .2), rgba(65, 217, 217, .1), rgba(251, 101, 66, .1));
 }
 .card_ongoing::before {
+    @extend .blink_animator;
+
     content: "";
     position: absolute;
     left: -2px;
@@ -54,7 +56,7 @@
 
     border-radius: 4px;
 
-    background-color: rgba(65, 217, 217, .6);
+    background-color: rgba(65, 217, 217, .4);
     
     transition: 2s;
 }

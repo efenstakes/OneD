@@ -180,3 +180,10 @@
         @include scale_mx($delay: calc( 0ms + calc(#{$i}*30ms) ));
     }
 }
+
+
+@for $i from 1 to 100 {
+    .blink_#{$i} {
+        @include blink_mx($delay: calc( 0ms + calc(#{$i}*30ms) ));
+    }
+}
