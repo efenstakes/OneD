@@ -45,29 +45,3 @@ p {
     padding: .4rem 1rem;
 }
 
-
-
-@keyframes shaker_kf {
-    0% {
-        transform: rotate(-20deg);
-        color: $SECONDARY_COLOR;
-    }
-    5% {
-        transform: rotate(20deg);
-    }
-    10% {
-        transform: rotate(-20deg);
-        color: $PRIMARY_COLOR;
-    }
-    15% {
-        transform: rotate(20deg);
-    }
-    20% {
-        transform: rotate(0deg);
-        color: $SECONDARY_COLOR;
-    }
-    30% {
-        transform: rotate(0deg);
-        color: $PRIMARY_COLOR;
-    }
-}

@@ -163,3 +163,61 @@ $standard_animation_duration: 360ms;
         transform: translateX(400px);
     }
 }
+
+
+
+@keyframes shaker_kf {
+    0% {
+        transform: rotate(-20deg);
+        color: $SECONDARY_COLOR;
+    }
+    5% {
+        transform: rotate(20deg);
+    }
+    10% {
+        transform: rotate(-20deg);
+        color: $PRIMARY_COLOR;
+    }
+    15% {
+        transform: rotate(20deg);
+    }
+    20% {
+        transform: rotate(0deg);
+        color: $SECONDARY_COLOR;
+    }
+    30% {
+        transform: rotate(0deg);
+        color: $PRIMARY_COLOR;
+    }
+}
+
+
+
+$ANIMATION_BLUE_LIGHT: rgba(65, 217, 217, .8);
+$ANIMATION_SUCCESS_LIGHT: rgba(17, 135, 46, .8);
+
+
+@keyframes shaker_kf_2 {
+    0% {
+        transform: rotate(-20deg);
+        color: $ANIMATION_BLUE_LIGHT;
+    }
+    5% {
+        transform: rotate(20deg);
+    }
+    10% {
+        transform: rotate(-20deg);
+        color: $ANIMATION_SUCCESS_LIGHT;
+    }
+    15% {
+        transform: rotate(20deg);
+    }
+    20% {
+        transform: rotate(0deg);
+        color: $ANIMATION_BLUE_LIGHT;
+    }
+    30% {
+        transform: rotate(0deg);
+        color: $ANIMATION_SUCCESS_LIGHT;
+    }
+}

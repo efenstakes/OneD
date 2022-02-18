@@ -51,7 +51,7 @@ const TaskItemCardComponent = ({ task, completed, isOngoing, onDelete, onOnGoing
                         clsx({
                             'card__actions__icon_button': true, 
                             'card__actions__icon_button__on_going': true,  
-                            'card__actions__icon_button__on_going__active': isOngoing,
+                            // 'card__actions__icon_button__on_going__active': isOngoing,
                             'fd_18': true,
                         })
                     }

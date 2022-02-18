@@ -341,7 +341,7 @@ const HomePage = () => {
                         <Button
                             color='primary'
                             variant='contained'
-                            size='small'
+                            size='medium'
                             onClick={endMyDay}
                             style={{
                                 textTransform: 'none',
