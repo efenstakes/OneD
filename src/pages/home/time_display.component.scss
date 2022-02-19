@@ -121,8 +121,7 @@ $TIMER_TEXTURES_COLOR: rgba($color: #1e1e1e, $alpha: .8); // $WHITE_COLOR;
 
 
 .time_container__actions__icon_button {
-    height: 2.1rem;
-    width: 2.1rem;
+    padding: .8rem;
     border-radius: 50%;
 
     display: flex;
@@ -131,17 +130,18 @@ $TIMER_TEXTURES_COLOR: rgba($color: #1e1e1e, $alpha: .8); // $WHITE_COLOR;
     
 
     background-color: $TIMER_TEXTURES_COLOR;
-    // border: 3px solid $SECONDARY_COLOR;
 
     @media screen and (min-width: 880px) {
-        height: 2.8rem;
-        width: 2.8rem;
+        padding: 1.16rem;
     }
 }
 
 
 .time_container__actions__icon_button__icon {
-    // color: orange;
     color: $WHITE_COLOR;
+
+    @media screen and (min-width: 880px) {
+        font-size: 1.2rem;
+    }
 }
 
