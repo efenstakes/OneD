@@ -145,6 +145,10 @@
 }
 
 .card__actions__icon_button__icon__active {
+    color: whitesmoke;
+}
+
+.card__actions__icon_button__icon__on_going__active {
     color: rgba(65, 217, 217, 1);
     animation: shaker_kf_2 2.4s ease-in-out 5s infinite alternate both;
 }
